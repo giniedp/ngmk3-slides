@@ -3,6 +3,7 @@ theme : "white"
 transition: "none"
 width: 1000
 height: 800
+center: false
 ---
 
 # Angular Meetup #3
@@ -174,6 +175,16 @@ class MyClass {
 
 ---
 
+<p style="background: #336; color: #fff;">Bausteine / Legokiste</p>
+
+* @Pipe
+* @Directive
+* @Component
+* @Injectable
+* @NgModule
+
+---
+
 [`@Pipe`](https://angular.io/api/core/Pipe)
 
 Transformiert einen Wert im Template,
@@ -183,7 +194,7 @@ bevor dieser ausgegeben wird
 ```html
 <div> Geschrieben am {{ myDate | date:'d.MM.YYYY' }} </div>
 ```
-<!-- .element: class="fragment" -->
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```html
 <ul>
@@ -192,17 +203,23 @@ bevor dieser ausgegeben wird
   </li>
 </ul>
 ```
-<!-- .element: class="fragment" -->
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```ts
 @Pipe({ name: 'sortBy' })
 class SortByPipe {
+```
+<!-- .element: class="fragment" data-fragment-index="3" -->
+```ts
   public transform(input: any[], byField: string) {
     return input.sort(/* ... */)
   }
+```
+<!-- .element: class="fragment" data-fragment-index="4" -->
+```ts
 }
 ```
-<!-- .element: class="fragment" -->
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 [DEMO](https://stackblitz.com/edit/ngmk3-pipes)
 <!-- .element: class="fragment" -->
@@ -211,25 +228,31 @@ class SortByPipe {
 
 [`@Directive`](https://angular.io/api/core/Directive) 
 
-gibt einem HTML Element ein 'Verhalten' <!-- .element: class="fragment" -->
+gibt einem HTML Element ein 'Verhalten' <!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```html
 <div trackClicks>Click mich</div>
 ```
-<!-- .element: class="fragment" -->
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```ts
 @Directive({ selector: '[trackClicks]' })
 class ClickTracker {
+```
+<!-- .element: class="fragment" data-fragment-index="3" -->
+```ts
     public counter = 0
 
     @HostListener('click')
     public track() {
         this.counter++
     }
+```
+<!-- .element: class="fragment" data-fragment-index="4" -->
+```ts
 }
 ```
-<!-- .element: class="fragment" -->
+<!-- .element: class="fragment" data-fragment-index="3" -->
 
 [DEMO](https://stackblitz.com/edit/ngmk3-directives)
 <!-- .element: class="fragment" -->
@@ -432,7 +455,7 @@ class MyComponent {
 <!-- .element: class="fragment" data-fragment-index="2" -->
 ```ts
     @Output()
-    public isActiveChanged = new EventEmitter<boolean>()
+    public isActiveChange = new EventEmitter<boolean>()
 ```
 <!-- .element: class="fragment" data-fragment-index="4" -->
 ```ts
@@ -443,7 +466,7 @@ class MyComponent {
 <!-- .element: class="fragment" data-fragment-index="3" -->
 ```ts
         if (v !== this.active) {
-            this.isActiveChanged.emit(v)
+            this.isActiveChange.emit(v)
         }
 ```
 <!-- .element: class="fragment" data-fragment-index="5" -->
